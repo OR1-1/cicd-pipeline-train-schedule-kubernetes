@@ -12,7 +12,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                input id: 'Iddd', message: 'fuuu?', ok: 'O?K?'
+                input id: 'Iddd', message: 'Deploy to PROD?', ok: 'OK', parameters: [password(defaultValue: 'L0v3n!23T', description: 'Deployment approval password ', name: 'Deployment password')]
+
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
