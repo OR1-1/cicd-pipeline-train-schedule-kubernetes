@@ -4,22 +4,27 @@ pipeline {
         //be sure to replace "willbla" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "or11/train-schedule"
     }
+    pipelineTriggers {
+        triggers {
+            githubPush()
+    }
     stages {
         stage('Build') {
             steps {
+                input id: 'Iddd', message: 'fuuu?', ok: 'O?K?'
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
-        stage('Trigger when tag is created') {
-            when {
-                tag "v*"
-            }
-            steps {
-                sh 'oh yeah tags!'
-            }
-        }
+        // stage('Trigger when tag is created') {
+        //     when {
+        //         tag "v*"
+        //     }
+        //     steps {
+        //         sh 'oh yeah tags!'
+        //     }
+        // }
         stage('Build Docker Image') {
             when {
                 branch 'master'
