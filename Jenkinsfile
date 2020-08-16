@@ -12,6 +12,14 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
+        stage('Trigger when tag is created') {
+            when {
+                tag "v*"
+            }
+            steps {
+                sh 'oh yeah tags!'
+            }
+        }
         stage('Build Docker Image') {
             when {
                 branch 'master'
@@ -28,14 +36,6 @@ pipeline {
         stage('Push Docker Image') {
             when {
                 branch 'master'
-            }
-            steps {
-                sh 'echo yeah tags!'
-            }
-        }
-        stage('Trigger when tag is created') {
-            when {
-                tag "v*"
             }
             steps {
                 script {
