@@ -25,9 +25,9 @@ pipeline {
                 }
             }
         }
-        stage('Push Docker Image') {
+        stage('Trigger when tag is created') {
             when {
-                branch 'master'
+                tag "v*"
             }
             steps {
                 script {
@@ -36,6 +36,14 @@ pipeline {
                         app.push("latest")
                     }
                 }
+            }
+        }
+        stage('Push Docker Image') {
+            when {
+                branch 'master'
+            }
+            steps {
+                sh 'echo yeah tags!'
             }
         }
         stage('DeployToProduction') {
