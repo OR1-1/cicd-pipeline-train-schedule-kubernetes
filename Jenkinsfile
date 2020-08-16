@@ -7,6 +7,7 @@ pipeline {
     pipelineTriggers {
         triggers {
             githubPush()
+        }
     }
     stages {
         stage('Build') {
