@@ -4,11 +4,11 @@ pipeline {
         //be sure to replace "willbla" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "or11/train-schedule"
     }
-    pipelineTriggers {
-        triggers {
-            githubPush()
-        }
-    }
+    // pipelineTriggers {
+    //     triggers {
+    //         githubPush()
+    //     }
+    // }
     stages {
         stage('Build') {
             steps {
